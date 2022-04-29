@@ -9,9 +9,11 @@ import {
 } from "@material-ui/icons";
 import styled from "styled-components";
 import paymentImg from "../images/pngegg (1).png";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Left = styled.div`
@@ -45,6 +47,7 @@ const SocialIcon = styled.h1`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ display: "none" })}
 `;
 
 const Title = styled.h3`
@@ -67,6 +70,7 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ backgroundColor: "#eee" })}
 `;
 
 const ContactItem = styled.div`
