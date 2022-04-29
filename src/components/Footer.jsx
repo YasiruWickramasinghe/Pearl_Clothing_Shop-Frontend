@@ -8,6 +8,7 @@ import {
   Twitter,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import paymentImg from "../images/pngegg (1).png";
 
 const Container = styled.div`
   display: flex;
@@ -128,7 +129,7 @@ const Footer = () => {
         <ContactItem>
           <MailOutline style={{ marginRight: "10px" }} /> contact@pearl.lk
         </ContactItem>
-        <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+        <Payment src={paymentImg} />
       </Right>
     </Container>
   );
