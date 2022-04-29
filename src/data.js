@@ -14,14 +14,14 @@ export const sliderItems = [
     bg: 'f5fafd'
   },
   {
-    id: 1,
+    id: 2,
     img: img2,
     title: 'POPULAR SALE',
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 10% OFF FOR NEW ARRIVALS.",
     bg: 'fcf1ed'
   },
   {
-    id: 1,
+    id: 3,
     img: img3,
     title: 'WINTER SALE',
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 55% OFF FOR NEW ARRIVALS.",
@@ -36,13 +36,48 @@ export const categories = [
     title: 'SHIRT STYLE'
   },
   {
-    id: 1,
+    id: 2,
     img: img5,
     title: 'LOUNGEWEAR LOVE'
   },
   {
-    id: 1,
+    id: 3,
     img: img6,
     title: 'LIGHT JACKETS'
+  }
+]
+
+export const popularProducts = [
+  {
+    id: 1,
+    img: img4
+  },
+  {
+    id: 2,
+    img: img5
+  },
+  {
+    id: 3,
+    img: img6
+  },
+  {
+    id: 4,
+    img: img4
+  },
+  {
+    id: 5,
+    img: img5
+  },
+  {
+    id: 6,
+    img: img6
+  },
+  {
+    id: 7,
+    img: img5
+  },
+  {
+    id: 8,
+    img: img6
   }
 ]
