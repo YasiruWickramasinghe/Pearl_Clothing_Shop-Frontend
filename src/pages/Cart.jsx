@@ -3,6 +3,10 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -138,6 +142,9 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+
+  console.log(cart);
   return (
     <Container>
       <Navbar />
@@ -154,63 +161,42 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> JESSIE THUNDER TROUSER
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> PR001
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 32.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.products.map((product) => (
+              <Product>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b> {product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Size:</b> {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Add />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Remove />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    $ {product.price * product.quantity}
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> NIKE SKIN SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> PR002
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> L
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>5</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 72</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummeryTitle>ORDER SUMMERY</SummeryTitle>
             <SummeryItem>
               <SummeryItemText>Subtotal</SummeryItemText>
-              <SummeryItemPrice>$ 80</SummeryItemPrice>
+              <SummeryItemPrice>$ {cart.total}</SummeryItemPrice>
             </SummeryItem>
             <SummeryItem>
               <SummeryItemText>Estimated Shipping</SummeryItemText>
@@ -222,7 +208,7 @@ const Cart = () => {
             </SummeryItem>
             <SummeryItem type="total">
               <SummeryItemText>Total</SummeryItemText>
-              <SummeryItemPrice>$ 80</SummeryItemPrice>
+              <SummeryItemPrice>$ {cart.total}</SummeryItemPrice>
             </SummeryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>
