@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
+import { useState } from "react";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -143,8 +144,13 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const [stripeToken, setStripeToken] = useState(null);
 
-  console.log(cart);
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+
+  console.log(stripeToken);
   return (
     <Container>
       <Navbar />
@@ -210,7 +216,18 @@ const Cart = () => {
               <SummeryItemText>Total</SummeryItemText>
               <SummeryItemPrice>$ {cart.total}</SummeryItemPrice>
             </SummeryItem>
-            <Button>CHECKOUT NOW</Button>
+            <StripeCheckout
+              name="Pearl Shopping"
+              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>
