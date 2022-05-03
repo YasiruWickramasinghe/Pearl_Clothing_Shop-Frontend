@@ -133,7 +133,7 @@ const Product = () => {
     }
   };
 
-  hadleClick = () => {
+  const hadleClick = () => {
     //update cart
   };
 
